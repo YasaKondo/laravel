@@ -32,3 +32,22 @@ Route::get('user/{name}', function($name)
 {
     return $name.'Welcome';
 });
+
+Route::get('howold/{age}', function($age){
+   return 'you are '.$age. ' years old !';
+})->where('age', '[1-9][0-9]');
+
+
+Route::get('view', function(){
+    $view = View::make('hello');
+    $view->with(array(
+        'name' => 'Yasu',
+        'email' => 'sample@gmail.com'
+    ));
+    $view->nest('header', 'header', array(
+        'title' => 'laravel道場'
+    ));
+    $view->nest('footer', 'footer');
+    View::share('corporation','wildcard');
+    return $view;
+});
